@@ -27,7 +27,7 @@ const res2= await chain.invoke({
 
   console.log("🚀🚀🚀 ~ res2:", res2,"🚀🚀🚀")
 
-  // Above output is that of a chain so using String Parser below
+//   // Above output is that of a chain so using String Parser below
 
 import { StringOutputParser } from "@langchain/core/output_parsers";
 
@@ -42,12 +42,12 @@ const outputParser = new StringOutputParser();
 // batch: call the chain on a list of inputs
 
 
-/**
-     * Create a new runnable sequence that runs each individual runnable in series,
-     * piping the output of one runnable into another runnable or runnable-like.
-     * @param coerceable A runnable, function, or object whose values are functions or runnables.
-     * @returns A new runnable sequence.
-     */
+// /**
+//      * Create a new runnable sequence that runs each individual runnable in series,
+//      * piping the output of one runnable into another runnable or runnable-like.
+//      * @param coerceable A runnable, function, or object whose values are functions or runnables.
+//      * @returns A new runnable sequence.
+//      */
 
 const llmChain = prompt.pipe(chatModel).pipe(outputParser);
 
