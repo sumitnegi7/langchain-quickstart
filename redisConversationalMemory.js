@@ -16,6 +16,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+
+app.get("/",()=>{
+  res.status(200).json({msg: "App running"})
+})
+
 app.get('/api/chat', async (req, res) => {
   // Check if the query parameter exists
   if (!req.query.qs) {
