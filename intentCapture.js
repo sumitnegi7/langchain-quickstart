@@ -12,9 +12,23 @@ import {
     MessagesPlaceholder,
   } from "@langchain/core/prompts";
 import { convertToOpenAIFunction } from "@langchain/core/utils/function_calling";
+import { CallbackManager } from "langchain/callbacks";
+// const model = new ChatOpenAI({
+//     openAIApiKey: process.env.OPEN_API_KEY,
+//   });
 
-const model = new ChatOpenAI({
+  const model = new ChatOpenAI({
+    maxTokens: 2000,
+    streaming: true,
     openAIApiKey: process.env.OPEN_API_KEY,
+    callbackManager: CallbackManager.fromHandlers({
+      async handleLLMNewToken(token) {
+        console.log({ token });
+      },
+      async handleLLMEnd(output) {
+        console.log("End of stream.", output);
+      },
+    }),
   });
   
 const intentAnalysisTool = new DynamicTool({
@@ -66,7 +80,7 @@ const executor = AgentExecutor.fromAgentAndTools({
 
 
 
-const input = "I wanna buy ps5";
+const input = "Features of ps5";
 console.log(`Calling agent executor with query: ${input}`);
 
 const result = await executor.invoke({
